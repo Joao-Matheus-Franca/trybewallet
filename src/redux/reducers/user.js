@@ -1,1 +1,10 @@
-// Esse reducer será responsável por tratar as informações da pessoa usuária
+function userReducer(state, action) {
+  return {
+    ...state,
+    user: {
+      email: action.email,
+    },
+  };
+}
+
+export default userReducer;

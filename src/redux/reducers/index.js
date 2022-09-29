@@ -1,3 +1,5 @@
+import userReducer from './user';
+
 const INITIAL_STATE = {
   user: {
     email: '',
@@ -10,8 +12,13 @@ const INITIAL_STATE = {
   },
 };
 
-function rootReducer(state = INITIAL_STATE) {
-  return state;
+function rootReducer(state = INITIAL_STATE, action) {
+  switch (action.type) {
+  case 'SAVE_EMAIL':
+    return userReducer(state, action);
+  default:
+    return state;
+  }
 }
 
 export default rootReducer;

@@ -1,5 +1,17 @@
-// import user from './user';
-// import wallet from './wallet';
+const INITIAL_STATE = {
+  user: {
+    email: '',
+  },
+  wallet: {
+    currencies: [],
+    expenses: [],
+    editor: false,
+    idToEdit: 0,
+  },
+};
 
-// Configure os seus reducers.
-// ATENÇÃO: você obrigatoriamente tem que utilizar as chaves "user" e "wallet" no seu estado global
+function rootReducer(state = INITIAL_STATE) {
+  return state;
+}
+
+export default rootReducer;

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import saveEmail from '../redux/actions/index';
+import { saveEmail } from '../redux/actions/index';
 
 class Login extends React.Component {
   state = {

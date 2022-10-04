@@ -4,6 +4,8 @@ const GET_API = 'GET_API';
 const ERROR_API = 'ERROR_API';
 const ADD_EXPENSE = 'ADD_EXPENSE';
 const DELETE_EXPENSE = 'DELETE_EXPENSE';
+const EDIT_EXPENSE = 'EDIT_EXPENSE';
+const FINAL_EXPENSE = 'FINAL_EXPENSE';
 
 const ENDPOINT = 'https://economia.awesomeapi.com.br/json/all';
 
@@ -56,5 +58,20 @@ export function deleteExpenses(id) {
   return {
     type: DELETE_EXPENSE,
     id,
+  };
+}
+
+export function editExpenses(id) {
+  return {
+    type: EDIT_EXPENSE,
+    id,
+  };
+}
+
+export function editingExpenses(state, id) {
+  return {
+    type: FINAL_EXPENSE,
+    id,
+    value: state,
   };
 }

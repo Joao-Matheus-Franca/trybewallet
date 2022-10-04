@@ -1,4 +1,5 @@
 import userReducer from './user';
+import { editReducer, deleteReducer, finalEditReducer } from './wallet';
 
 const INITIAL_STATE = {
   user: {
@@ -13,6 +14,7 @@ const INITIAL_STATE = {
   },
   isFetching: false,
   error: '',
+  editing: false,
 };
 
 function rootReducer(state = INITIAL_STATE, action) {
@@ -25,11 +27,8 @@ function rootReducer(state = INITIAL_STATE, action) {
   case 'GET_API':
     return { ...state,
       wallet: {
+        ...state.wallet,
         currencies: action.payload,
-        expenses: [],
-        editor: false,
-        idToEdit: 0,
-        total: [0],
       },
       isFetching: false };
   case 'ERROR_API':
@@ -49,17 +48,14 @@ function rootReducer(state = INITIAL_STATE, action) {
       },
       isFetching: false,
       error: '',
+      editing: false,
     };
   case 'DELETE_EXPENSE':
-    return {
-      ...state,
-      wallet: {
-        ...state.wallet,
-        expenses: state.wallet.expenses.filter((e) => e.id !== action.id),
-        total: state.wallet.expenses.filter((e) => e.id !== action.id)
-          .map((e) => Number(e.value) * Number(e.exchangeRates[e.currency].ask)),
-      },
-    };
+    return deleteReducer(state, action);
+  case 'EDIT_EXPENSE':
+    return editReducer(state, action);
+  case 'FINAL_EXPENSE':
+    return finalEditReducer(state, action);
   default:
     return state;
   }

@@ -39,7 +39,8 @@ function rootReducer(state = INITIAL_STATE, action) {
       user: { ...state.user },
       wallet: { ...state.wallet,
         expenses: [...state.wallet.expenses, {
-          id: state.wallet.expenses.length,
+          id: state.wallet.expenses[0] === undefined ? 0
+            : (state.wallet.expenses[state.wallet.expenses.length - 1].id + 1),
           ...action.value,
           exchangeRates: action.exchangeRates,
         }],
@@ -48,6 +49,16 @@ function rootReducer(state = INITIAL_STATE, action) {
       },
       isFetching: false,
       error: '',
+    };
+  case 'DELETE_EXPENSE':
+    return {
+      ...state,
+      wallet: {
+        ...state.wallet,
+        expenses: state.wallet.expenses.filter((e) => e.id !== action.id),
+        total: state.wallet.expenses.filter((e) => e.id !== action.id)
+          .map((e) => Number(e.value) * Number(e.exchangeRates[e.currency].ask)),
+      },
     };
   default:
     return state;

@@ -3,6 +3,7 @@ const REQUEST_API = 'REQUEST_API';
 const GET_API = 'GET_API';
 const ERROR_API = 'ERROR_API';
 const ADD_EXPENSE = 'ADD_EXPENSE';
+const DELETE_EXPENSE = 'DELETE_EXPENSE';
 
 const ENDPOINT = 'https://economia.awesomeapi.com.br/json/all';
 
@@ -48,5 +49,12 @@ export function addExpenses(prop) {
       .then((response) => response.json())
       .then((json) => dispatch(expenses(prop, json)))
       .catch((error) => errorAPI(error));
+  };
+}
+
+export function deleteExpenses(id) {
+  return {
+    type: DELETE_EXPENSE,
+    id,
   };
 }
